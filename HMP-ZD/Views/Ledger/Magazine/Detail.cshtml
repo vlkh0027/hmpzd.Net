@@ -1,0 +1,417 @@
+﻿@{
+    ViewBag.Title = "雑誌詳細";
+    ViewBag.Header = HeaderMenu.Index;
+    ViewBag.LedgerType = LedgerType.Magazine;
+    ViewBag.ActionType = ActionType.Detail;
+}
+
+<script src="/Scripts/ledger.js"></script>
+
+<input id="ID" type="hidden" value="@ViewBag.ID" />
+<ul class="btn-edit-list-top">
+	<li><a href="#" data-href="url_popup.html"class="overlay"><i class="fa fa-lg fa-fw fa-share"></i>URL共有</a></li>
+	<li><a href="#"><i class="fa fa-lg fa-fw fa-print"></i>印刷</a></li>
+	<li><a href="/Ledger/Magazine/Edit?id=@ViewBag.ID"><i class="fa fa-lg fa-fw fa-pencil"></i>編集</a></li>
+	<li><a href="order_mail.html"><i class="fa fa-lg fa-fw fa-envelope"></i>発注メール</a></li>
+	<li><a href="#" id="delete"><i class="fa fa-lg fa-fw fa-trash"></i>削除</a></li>
+</ul>
+<div class="box-info01">
+	<dl class="w-full">
+		<dt class="pt-30">ステータス</dt>
+		<dd>
+			<ul class="btn-status-list">
+				<li><a href="#">起票</a><span>@ViewBag.IssuanceDate<br />@ViewBag.IssuanceUserName</span></li>
+				<li><a href="#">HEN受付</a><span>@ViewBag.ReceptDate<br />@ViewBag.ReceptUserName</span></li>
+				<li><a href="#">BA受注</a><span>@ViewBag.BAOrderDate<br />@ViewBag.BAOrderUserName</span></li>
+				<li><a href="#">媒体社申込</a><span>@ViewBag.CustomerApplicationDate<br />@ViewBag.CustomerApplicationUser</span></li>
+				<li><a href="#">送稿担当者受付</a><span>@ViewBag.SubmitReceptDate<br />@ViewBag.SubmitReceptUser</span></li>
+				<li><a href="#">発注メール</a><span>yyyy/mm/dd<br />営業 太郎</span></li>
+				<li class="ml-20"><a href="#" class="pe-none">中止</a><span>@ViewBag.StopDate<br />@ViewBag.StopUser</span></li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+<div class="box-info02">
+	<dl>
+		<dt>伝票番号</dt>
+		<dd>
+            @ViewBag.ControlNumber&nbsp;
+		</dd>
+		<dt>媒体社</dt>
+		<dd>
+            @(ViewBag.CustomerFree ?? ViewBag.CustomerName)&nbsp;
+		</dd>
+		<dt>ビークル名</dt>
+		<dd>
+			@(ViewBag.VehicleFree ?? ViewBag.VehicleName)&nbsp;
+		</dd>
+		<dt>発売日</dt>
+		<dd>
+			@ViewBag.ReleaseDate&nbsp;
+@*            @if(ViewBag.ChangeReleaseDate) *@
+            {
+                <span class="cl-ok-700 ml-20"><i class="fa fa-lg fa-fw fa-exclamation-circle"></i>発売日が変更されました</span>
+            }
+		</dd>
+	</dl>
+	<dl>
+		<dt>広告主</dt>
+		<dd>
+            @ViewBag.AdvertiserName&nbsp;
+		</dd>
+		<dt>業種（大）</dt>
+		<dd>
+			流通・小売
+		</dd>
+		<dt>件名</dt>
+		<dd>
+			@ViewBag.Subject&nbsp;
+		</dd>
+	</dl>
+</div>
+<div class="box-info02">
+	<dl>
+		<dt>営業担当者</dt>
+		<dd>
+            @foreach(var item in ViewBag.SaleRepresentatives)
+            {
+                @item.Text<br />
+            }
+        </dd>
+        <dt>雑誌部担当者</dt>
+        <dd>
+            @foreach(var item in ViewBag.MagazineRepresentatives)
+            {
+                @item.Text<br />
+            }
+        </dd>
+    </dl>
+    <dl>
+        <dt>制作担当者</dt>
+        <dd>
+            @foreach(var item in ViewBag.ProductionRepresentatives)
+            {
+                @item.Text<br />
+            }
+        </dd>
+        <dt>進行部担当者</dt>
+        <dd>
+            @foreach(var item in ViewBag.ProgressRepresentatives)
+            {
+                @item.Text<br />
+            }
+        </dd>
+    </dl>
+</div>
+<div class="box-info02">
+	<dl class="w-full">
+        @foreach(var item in ViewBag.AdvetisementValues)
+        {
+            var anony = HtmlHelper.AnonymousObjectToHtmlAttributes(item);
+
+            <dt></dt>
+            <dd>
+                <div class="dsp-t">
+                    <div class="dsp-tc w-120">
+                        <label><input type="checkbox" checked="checked" disabled="disabled" />@anony["Name"]</label>
+                    </div>
+                    <div class="dsp-tc w-160">
+                        画：@anony["Picture"]
+                    </div>
+                    <div class="dsp-tc w-160">
+                        色：@anony["Color"]
+                    </div>
+                    <div class="dsp-tc w-200">
+                        ページ：@anony["Page"]
+                    </div>
+                    @if(anony["Name"] == "純広告")
+                    {
+                        <label>電子マガジン<input type="checkbox" checked="@((ViewBag.ElectronicMagazine == 1) ? "checked" : "")" disabled="disabled" /></label>
+                    }
+                </div>
+            </dd>
+        }
+	</dl>
+</div>
+<div class="cotent-inner02 mt-20">
+	<h2 class="ttl-h2 tgl-btn mt-0 on">計上内容</h2>
+	<div class="tgl-box on">
+		<div class="pt-20 pb-20">計上日@(ViewBag.RecordingDate)</div>
+		<table class="tbl">
+			<colgroup>
+				<col style="width:100px;">
+
+                <col style="width:100px;">
+			</colgroup>
+			<tr><th class="ta-l">コミッション</th><td>@ViewBag.CommissionRate</td></tr>
+		</table>
+		<table class="tbl w-full">
+			<colgroup>
+				<col style="width:150px;">
+
+                <col style="width:200px;">
+				<col style="width:200px;">
+
+                <col style="width:200px;">
+				<col style="width:auto;">
+
+            </colgroup>
+
+            <tr><th></th><th>グロス金額</th><th>料率</th><th>ネット金額</th><th>コメント</th></tr>
+
+            <tr><th class="ta-l">掲載料</th><td class="ta-r">@ViewBag.PublicationFeeGross</td><td class="ta-r">@ViewBag.PublicationFeeRate%</td><td class="ta-r bg-hk-300">@ViewBag.PublicationFeeNet</td><td>@ViewBag.PublicationFeeComment</td></tr>
+			<tr><th class="ta-l">制作料</th><td class="ta-r">@ViewBag.ProductionFeeGross</td><td class="ta-r">@ViewBag.ProductionFeeRate%</td><td class="ta-r bg-hk-300">@ViewBag.ProductionFeeNet</td><td>@ViewBag.ProductionFeeComment</td></tr>
+			<tr><th class="ta-r bg-hk-700">その他1</th><td class="ta-r">@ViewBag.Other1Gross</td><td class="ta-r">@ViewBag.Other1Rate%</td><td class="ta-r bg-hk-300">@ViewBag.Other1Net</td><td>@ViewBag.Other1Comment</td></tr>
+			<tr><th class="ta-r bg-hk-700">その他2</th><td class="ta-r">@ViewBag.Other2Gross</td><td class="ta-r">@ViewBag.Other2Rate%</td><td class="ta-r bg-hk-300">@ViewBag.Other2Net</td><td>@ViewBag.Other2Comment</td></tr>
+			<tr><th class="ta-r bg-hk-700">その他3</th><td class="ta-r">@ViewBag.Other3Gross</td><td class="ta-r">@ViewBag.Other3Rate%</td><td class="ta-r bg-hk-300">@ViewBag.Other3Net</td><td>@ViewBag.Other3Comment</td></tr>
+			<tr><th class="ta-l">その他</th><td class="ta-r bg-hk-300">@ViewBag.OtherGross</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">@ViewBag.OtherNet</td><td>@ViewBag.OtherComment</td></tr>
+			<tr><th class="ta-l">払い金額合計</th><td class="ta-r bg-hk-300">@ViewBag.PaymentSumGross</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">@ViewBag.PaymentSumNet</td><td>@ViewBag.PaymentSumComment</td></tr>
+			<tr><th class="ta-l">媒体収益</th><td class="ta-r">@ViewBag.MediaRevenueGross</td><td class="ta-r">@ViewBag.MediaRevenueRate%</td><td class="ta-r bg-hk-300">@ViewBag.MediaRevenueNet</td><td>@ViewBag.MediaRevenueComment</td></tr>
+			<tr><th class="ta-l">媒体戦略原価B</th><td class="ta-r">@ViewBag.StrategicCostBGross</td><td class="ta-r">@ViewBag.StrategicCostBRate%</td><td class="ta-r bg-hk-300">@ViewBag.StrategicCostBNet</td><td>@ViewBag.StrategicCostBComment</td></tr>
+			<tr><th class="ta-l">媒体戦略原価A</th><td class="ta-r">@ViewBag.StrategicCostAGross</td><td class="ta-r">@ViewBag.StrategicCostARate%</td><td class="ta-r bg-hk-300">@ViewBag.StrategicCostANet</td><td>@ViewBag.StrategicCostAComment</td></tr>
+			<tr><th class="ta-l">引渡建値</th><td class="ta-r bg-hk-300">@ViewBag.DeliveryGross</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">@ViewBag.DeliveryNet</td><td>@ViewBag.DeliveryQuotationPriceComment</td></tr>
+			<tr><th class="ta-l">納品日</th><td colspan="4">@ViewBag.Deadline</td></tr>
+            <tr><th class="ta-l">備考</th><td colspan="4">@ViewBag.RecordedMemo</td></tr>
+		</table>
+		<table class="tbl mt-10">
+			<colgroup>
+				<col style="width:200px;">
+
+                <col style="width:200px;">
+			</colgroup>
+			<tr><th class="ta-l">売上（PM）</th><td class="ta-r">@ViewBag.PM</td></tr>
+			<tr><th class="ta-l">営収</th><td class="ta-r">@ViewBag.BusinessIncome</td></tr>
+		</table>
+	</div>
+	<h2 class="ttl-h2 tgl-btn">進行部情報</h2>
+	<div class="tgl-box">
+		<table class="tbl w-full">
+			<colgroup>
+				<col style="width:150px;">
+
+                <col style="width:auto;">
+				<col style="width:150px;">
+
+                <col style="width:auto;">
+				<col style="width:150px;">
+
+                <col style="width:auto;">
+			</colgroup>
+			<tr><th class="ta-l">校了日</th><td>@ViewBag.CalibrationDate</td><th class="ta-l">送稿日</th><td colspan="3">@ViewBag.TransmissionDate</td></tr>
+            <tr><th class="ta-l">送稿方法</th><td>
+                @if(ViewBag.TransmissionMethod == 1)
+                {
+                    @:オンライン
+                }
+                else
+                {
+                    @:オフライン
+                }
+                 </td><th class="ta-l">送稿形態</th><td>@ViewBag.TransmissionFormName</td>
+			<th class="ta-l">新原稿/在版</th><td>
+                @if(ViewBag.DocumntType == 1)
+                {
+                    @:新原稿
+                }
+                else
+                {
+                    @:在版
+                }
+                 </td></tr>
+			<tr><th class="ta-l">BA担当者</th>
+				<td colspan="5">
+                    @foreach(var item in ViewBag.BARepresentatives)
+                    {
+                        @item.Text<br />
+                    }
+                </td>
+            </tr>
+            <tr><th class="ta-l">出版担当者</th><td colspan="5">@ViewBag.PublisherRepresentative</td></tr>
+			<tr><th class="ta-l">メモ</th>
+				<td colspan="5">
+                    @ViewBag.ProgressMemo
+				</td></tr>
+		</table>
+		<div class="dsp-t mt-10 mb-5">
+			<div class="dsp-tc w-100"><h3 class="mt-0 mb-0">送稿件数</h3></div>
+			<div class="dsp-tc va-m">00件</div>
+		</div>
+		<table class="tbl w-full highlight">
+			<colgroup>
+				<col style="width:auto;">
+
+                <col style="width:auto;">
+				<col style="width:auto;">
+
+                <col style="width:auto;">
+				<col style="width:auto;">
+
+                <col style="width:auto;">
+				<col style="width:auto;">
+
+            </colgroup>
+
+            <tr><th>送稿日</th><th>BA</th><th>担当者</th><th>クライアント</th><th>送稿形態</th><th>新原稿/在版</th><th>原稿形態</th></tr>
+            <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+			<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+			<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+			<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+			<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+		</table>
+	</div>
+	<h2 class="ttl-h2 tgl-btn">備考欄</h2>
+	<div class="tgl-box">
+		@ViewBag.Memo
+	</div>
+	<h2 class="ttl-h2 tgl-btn">メール送信先一覧</h2>
+	<div class="tgl-box">
+		<table class="tbl w-full">
+			<colgroup>
+				<col style="width:200px;">
+				<col style="width:auto;">
+				<col style="width:auto;">
+			</colgroup>
+			<tr>
+				<th>ユーザ名</th>
+				<th>部署</th>
+				<th>メールアドレス</th>
+			</tr>
+            @foreach(var item in ViewBag.MailDestinations)
+            {
+                var anony = HtmlHelper.AnonymousObjectToHtmlAttributes(item);
+
+                <tr>
+                    <td>@anony["Name"]</td>
+                    <td>@anony["DepartmentName"]</td>
+                    <td><a href="mailto:@(anony["Email"])">@anony["Email"]</a></td>
+                </tr>
+            }
+		</table>
+	</div>
+	<h2 class="ttl-h2 tgl-btn">更新履歴</h2>
+	<div class="tgl-box">
+		<div class="dsp-t">
+			<div class="dsp-tc">
+					<h3 class="mb-5">ナンバー部</h3>
+					<table class="tbl w-640">
+						<colgroup>
+							<col style="width:200px;">
+							<col style="width:150px;">
+							<col style="width:auto;">
+						</colgroup>
+						<tr>
+							<th class="name">更新者</th>
+							<th class="date">更新日時</th>
+							<th class="cont">更新内容</th>
+						</tr>
+					</table>
+					<div class="box-scroll w-640">
+						<table class="tbl w-640">
+							<colgroup>
+								<col style="width:200px;">
+								<col style="width:150px;">
+								<col style="width:auto;">
+							</colgroup>
+							<tr>
+								<td class="name">Aさん</td>
+								<td class="date">2017/01/18 23:54</td>
+								<td class="cont">「媒体収益」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Bさん</td>
+								<td class="date">2017/01/17 03:54</td>
+								<td class="cont">「戦略原価A」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Aさん</td>
+								<td class="date">2017/01/15  17:10</td>
+								<td class="cont">「制作料」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/12  23:54</td>
+								<td class="cont">「媒体社」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+			<div class="dsp-tc">
+					<h3 class="mb-5">進行部</h3>
+					<table class="tbl w-640">
+						<colgroup>
+							<col style="width:200px;">
+							<col style="width:150px;">
+							<col style="width:auto;">
+						</colgroup>
+						<tr>
+							<th class="name">更新者</th>
+							<th class="date">更新日時</th>
+							<th class="cont">更新内容</th>
+						</tr>
+					</table>
+					<div class="box-scroll w-640">
+						<table class="tbl w-640">
+							<colgroup>
+								<col style="width:200px;">
+								<col style="width:150px;">
+								<col style="width:auto;">
+							</colgroup>
+							<tr>
+								<td class="name">Aさん</td>
+								<td class="date">2017/01/18 23:54</td>
+								<td class="cont">「媒体収益」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Bさん</td>
+								<td class="date">2017/01/17 03:54</td>
+								<td class="cont">「戦略原価A」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Aさん</td>
+								<td class="date">2017/01/15  17:10</td>
+								<td class="cont">「制作料」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/12  23:54</td>
+								<td class="cont">「媒体社」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+							<tr>
+								<td class="name">Cさん</td>
+								<td class="date">2017/01/11 07:00</td>
+								<td class="cont">「戦略原価B」を変更</td>
+							</tr>
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="btn-back">
+	<a href="index.html"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+</div>

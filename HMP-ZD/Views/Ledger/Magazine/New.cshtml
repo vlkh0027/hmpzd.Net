@@ -1,0 +1,440 @@
+﻿@{
+    ViewBag.Title = "雑誌登録";
+    ViewBag.Header = HeaderMenu.Index;
+    ViewBag.LedgerType = LedgerType.Magazine;
+    ViewBag.ActionType = ActionType.New;
+}
+<script src="~/Scripts/magledger.js"></script>
+
+@using (Html.BeginForm("New", "Magazine", FormMethod.Post, new { id = "Index" }))
+{
+    <div class="cotent-inner02 mt-20">
+        <div class="box-info01">
+            <dl class="w-full">
+                <dt class="pt-30">ステータス</dt>
+                <dd>
+                    <ul class="btn-status-list">
+                        <li>
+                            <a href="#">起票</a>
+                            @if (ViewBag.ActionType == ActionType.New)
+                            {
+                                <span id="IssuanceDate">@(DateTime.Now.ToString("yyyy/MM/dd"))</span><br />
+                                <span id="IssuanceUserName">@ViewBag.UserName</span>
+                            }
+                            else if (ViewBag.ActionType == ActionType.Edit)
+                            {
+                                <span id="IssuanceDate">@ViewBag.IssuanceDate</span><br />
+                                <span id="IssuanceUserName">@ViewBag.IssuanceUser</span>
+                            }
+                        </li>
+                        <li><a class="setUser" href="javascript:void(0);">HEN受付</a><span>@Html.TextBox("ReceptDate", (string)ViewBag.ReceptDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("ReceptUserName", (string)ViewBag.ReceptUserName, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+                        <li><a class="setUser" href="javascript:void(0);">BA受注</a><span>@Html.TextBox("BAOrderDate", (string)ViewBag.BAOrderDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("BAOrderUserName", (string)ViewBag.BAOrderUserName, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+                        <li><a class="setUser" href="javascript:void(0);">媒体社申込</a><span>@Html.TextBox("CustomerApplicationDate", (string)ViewBag.CustomerApplicationDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("CustomerApplicationUser", (string)ViewBag.CustomerApplicationUser, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+                        <li><a class="setUser" href="javascript:void(0);">送稿担当者受付</a><span>@Html.TextBox("SubmitReceptDate", (string)ViewBag.SubmitReceptDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("SubmitReceptUser", (string)ViewBag.SubmitReceptUser, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+                        <li><a href="#">発注メール</a><span>@ViewBag.MailDate<br />@ViewBag.MailUser</span></li>
+                        <li class="ml-20">
+                            <a href="#" class="pe-none">ステータス</a>
+                            @Html.DropDownList("Stop", (List<SelectListItem>)ViewBag.StopItems, "選択してください")
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <div class="box-info02">
+            <dl>
+                <dt>伝票番号</dt>
+                <dd>
+                    <div class="dsp-t selectusers">
+                        <div><button class="overlay, show_seluser">自分を担当者に設定</button></div>
+                        <div class="dsp-tc">
+                            <ul class="selusers" id="saleRepresentatives"></ul>
+                        </div>
+                    </div>
+                    @*<span class="jsShowUserSelect"></span><button class="ml-40 setown overlay show_seluser">自分を担当者に設定</button>*@
+                </dd>
+                <dt class="w-140 required mr-5">部署</dt>
+                <dd>
+                    @Html.DropDownList("Department", (List<SelectListItem>)ViewBag.DepartmentItems, "選択してください")
+                </dd>
+                <dt class="w-140 required mr-5">担当チーム</dt>
+                <dd>
+                    @Html.DropDownList("Team", (List<SelectListItem>)ViewBag.TeamItems, "選択してください")
+                </dd>
+                <dt class="w-140 required mr-5">媒体社</dt>
+                <dd>
+                    @Html.DropDownList("CustomerID", (List<SelectListItem>)ViewBag.CustomerIDItems, "選択してください")
+                    <a href="#" class="other ml-10">その他</a>
+                    <div class="other-text">
+                        @Html.TextBox("CustomerFree", (string)ViewBag.CustomerFree, new { @class = "mt-5 w-300" })
+                    </div>
+                </dd>
+                <dt class="w-140 required mr-5">ビークル名</dt>
+                <dd>
+                    @Html.DropDownList("VehicleID", (List<SelectListItem>)ViewBag.VehicleIDItems, "選択してください")
+                    <a href="#" class="other ml-10">その他</a>
+                    <div class="other-text">
+                        @Html.TextBox("VehicleFree", (string)ViewBag.VehicleFree, new { @class = "mt-5 w-300" })
+                    </div>
+                </dd>
+                <dt class="w-140 required mr-5">発売日</dt>
+                <dd>
+                    @Html.TextBox("ReleaseDate", (string)ViewBag.ReleaseDate, new { @class = "datepicker" })
+                </dd>
+            </dl>
+            <dl>
+                <dt class="w-140 required mr-5">広告主</dt>
+                <dd>
+                    <button class="overlay mr-10, show_ad_company">選択</button><span id="company"></span>
+                </dd>
+                <dt>業種（大）</dt>
+                <dd id="industry">
+                    流通・小売
+                </dd>
+                <dt>件名</dt>
+                <dd>
+                    @Html.TextBox("Subject", (string)ViewBag.Subject)
+                </dd>
+            </dl>
+        </div>
+        <div class="box-info02">
+            <dl>
+                <dt>営業担当者</dt>
+                <dd>
+                    <div class="dsp-t selectusers">
+                        <div class="dsp-tc w-60"><button class="overlay, show_seluser">選択</button></div>
+                        <div class="dsp-tc">
+                            <ul class="selusers"></ul>
+                        </div>
+                    </div>
+                </dd>
+                <dt>雑誌部担当者</dt>
+                <dd>
+                    <div class="dsp-t selectusers">
+                        <div class="dsp-tc w-60"><button class="overlay, show_seluser">選択</button></div>
+                        <div class="dsp-tc">
+                            <ul class="selusers"></ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>制作担当者</dt>
+                <dd>
+                    <div class="dsp-t selectusers">
+                        <div class="dsp-tc w-60"><button class="overlay, show_seluser">選択</button></div>
+                        <div class="dsp-tc">
+                            <ul class="selusers"></ul>
+                        </div>
+                    </div>
+                </dd>
+                <dt>進行部担当者</dt>
+                <dd>
+                    <div class="dsp-t selectusers">
+                        <div class="dsp-tc w-60"><button class="overlay, show_seluser">選択</button></div>
+                        <div class="dsp-tc">
+                            <ul class="selusers"></ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="box-info02">
+            <dl class="w-full">
+                <dt></dt>
+                <dd>
+                    <div class="dsp-t" id="Advertisements">
+                        @foreach (var item in (List<SelectListItem>)ViewBag.AdvertisementTypes)
+                        {
+                            <div id="adv">
+                                <div class="dsp-tc w-120">
+                                    <label><input id="name" type="checkbox" value="@item.Value" />@item.Text</label>
+                                </div>
+                                <div class="dsp-tc w-160">
+                                    画：
+                                    @Html.DropDownList("Pic", (List<SelectListItem>)ViewBag.PictureItems, new { @class = "select-input-text" })
+                                </div>
+                                <div class="dsp-tc w-160">
+                                    色：
+                                    @Html.DropDownList("Col", (List<SelectListItem>)ViewBag.ColorItems, new { @class = "select-input-text" })
+                                </div>
+                                <div class="dsp-tc w-200">
+                                    ページ：
+                                    @Html.DropDownList("Pag", (List<SelectListItem>)ViewBag.PageItems, new { @class = "select-input-text" })
+                                </div>
+
+                                @if (item.Text == "純広告")
+                                {
+                                    <div class="dsp-tc w-200">
+                                        <label>電子マガジン<input id='emag' type="checkbox" /></label>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <h2 class="ttl-h2 tgl-btn mt-0 on">計上内容</h2>
+        <div class="tgl-box on">
+            <table class="tbl">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:200px;">
+                </colgroup>
+                <tr><th class="ta-l required">計上年月</th><td>@(Html.TextBox("RecordingDate", (string)ViewBag.RecordingDate, new { @class = "datepicker w-120 ml-5 mr-10", id = "recordingDate" }))</td></tr>
+            </table>
+            <table class="tbl mt-10">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:200px;">
+                </colgroup>
+                <tr><th class="ta-l">コミッション</th><td><input type="text"></td></tr>
+            </table>
+            <table class="tbl w-full" id="payee">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:200px;">
+                    <col style="width:200px;">
+                    <col style="width:200px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th></th><th>グロス金額</th><th>料率</th><th>ネット金額</th><th>コメント</th></tr>
+                <tr class="publication"><th class="ta-l">掲載料</th><td class="gross">@Html.TextBox("PublicationFeeGross", (string)ViewBag.PublicationFeeGross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("PublicationFeeRate", (string)ViewBag.PublicationFeeRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("PublicationFeeComment", (string)ViewBag.PublicationFeeComment, new { @class = "w-full" })</td></tr>
+                <tr class="publication"><th class="ta-l">制作料</th><td class="gross">@Html.TextBox("ProductionFeeGross", (string)ViewBag.ProductionFeeGross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("ProductionFeeRate", (string)ViewBag.ProductionFeeRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("ProductionFeeComment", (string)ViewBag.ProductionFeeComment, new { @class = "w-full" })</td></tr>
+                <tr class="others"><th class="ta-r bg-hk-700">その他1</th><td class="gross">@Html.TextBox("Other1Gross", (string)ViewBag.Other1Gross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("Other1Rate", (string)ViewBag.Other1Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("Other1Comment", (string)ViewBag.Other1Comment, new { @class = "w-full" })</td></tr>
+                <tr class="others"><th class="ta-r bg-hk-700">その他2</th><td class="gross">@Html.TextBox("Other2Gross", (string)ViewBag.Other2Gross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("Other2Rate", (string)ViewBag.Other2Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("Other2Comment", (string)ViewBag.Other2Comment, new { @class = "w-full" })</td></tr>
+                <tr class="others"><th class="ta-r bg-hk-700">その他3</th><td class="gross">@Html.TextBox("Other3Gross", (string)ViewBag.Other3Gross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("Other3Rate", (string)ViewBag.Other3Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("Other3Comment", (string)ViewBag.Other3Comment, new { @class = "w-full" })</td></tr>
+                <tr class="otherTotal"><th class="ta-l">その他</th><td class="ta-r bg-hk-300 gross">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("OtherComment", (string)ViewBag.OtherComment, new { @class = "w-full" })</td></tr>
+                <tr class="payeeTotal"><th class="ta-l">払い金額合計</th><td class="ta-r bg-hk-300 gross">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300 netprice">0</td><td><input class="w-full" type="text"></td></tr>
+                <tr class="revenue"><th class="ta-l">媒体収益</th><td class="gross">@Html.TextBox("MediaRevenueGross", (string)ViewBag.MediaRevenueGross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("MediaRevenueRate", (string)ViewBag.MediaRevenueRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("MediaRevenueComment", (string)ViewBag.MediaRevenueComment, new { @class = "w-full" })</td></tr>
+                <tr class="strategic"><th class="ta-l">媒体戦略原価B</th><td class="gross">@Html.TextBox("StrategicCostBGross", (string)ViewBag.StrategicCostBGross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("StrategicCostBRate", (string)ViewBag.StrategicCostBRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("StrategicCostBComment", (string)ViewBag.StrategicCostBComment, new { @class = "w-full" })</td></tr>
+                <tr class="strategic"><th class="ta-l">媒体戦略原価A</th><td class="gross">@Html.TextBox("StrategicCostAGross", (string)ViewBag.StrategicCostAGross, new { @class = "w-full" })</td><td class="rate">@Html.TextBox("StrategicCostARate", (string)ViewBag.StrategicCostARate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300 netprice">0</td><td>@Html.TextBox("StrategicCostAComment", (string)ViewBag.StrategicCostBComment, new { @class = "w-full" })</td></tr>
+                <tr class="deliveryquotation"><th class="ta-l">引渡建値</th><td class="ta-r bg-hk-300 gross">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300 netprice">0</td><td><input class="w-full" type="text"></td></tr>
+                <tr><th class="ta-l">納品日</th><td colspan="4">@Html.TextBox("Deadline", (string)ViewBag.Deadline, new { @class = "datepicker w-120" })</td></tr>
+                <tr><th class="ta-l">備考</th><td colspan="4">@Html.TextArea("RecordedMemo", (string)ViewBag.RecordedMemo, new { @class = "w-full" })</td></tr>
+            </table>
+            <table class="tbl mt-10" id="total">
+                <colgroup>
+                    <col style="width:200px;">
+                    <col style="width:200px;">
+                </colgroup>
+                <tr class="pm"><th class="ta-l">売上（PM）</th><td class="ta-r total">0</td></tr>
+                <tr class="businessincome"><th class="ta-l">営収</th><td class="ta-r total">0</td></tr>
+            </table>
+        </div>
+        <h2 class="ttl-h2 tgl-btn">進行部情報</h2>
+        <div class="tgl-box">
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th class="ta-l">校了日</th><td>@Html.TextBox("CalibrationDate", (string)ViewBag.CalibrationDate, new { @class = "datepicker mr-5" })</td><th class="ta-l">送稿日</th><td colspan="3">@Html.TextBox("TransmissionDate", (string)ViewBag.TransmissionDate, new { @class = "datepicker mr-5" })</td></tr>
+                <tr>
+                    <th class="ta-l">送稿方法</th>
+                    <td><label>@Html.RadioButton("TransmissionMethod", 1, ((int?)ViewBag.TransmissionMethod == 1))オンライン</label><label>@Html.RadioButton("TransmissionMethod", 2, ((int?)ViewBag.TransmissionMethod == 2))オフライン</label></td>
+                    <th class="ta-l">送稿形態</th>
+                    <td>
+                        @Html.DropDownList("TransmissionForm", (List<SelectListItem>)ViewBag.TransmissionFormItems)
+                    </td>
+                    <th class="ta-l">新原稿/在版</th>
+                    <td><label>@Html.RadioButton("DocumentType", 1, ((int?)ViewBag.DocumentType == 1))新原稿</label><label>@Html.RadioButton("DocumentType", 2, ((int?)ViewBag.DocumentType == 2))在版</label></td>
+                </tr>
+                <tr>
+                    <th class="ta-l">BA担当者</th>
+                    <td colspan="5">
+                        <div class="selectusers">
+                            <button class="overlay, show_seluser">選択</button><br>
+                            <ul class="selusers" id="baRepresentatives"></ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr><th class="ta-l">出版担当者</th><td colspan="5">@Html.TextBox("PublisherRepresentative", (string)ViewBag.PublisherRepresentative)</td></tr>
+                <tr><th class="ta-l">メモ</th><td colspan="5">@Html.TextArea("ProgressMemo", (string)ViewBag.ProgressMemo, 4, 1, new { @class = "w-full" })</td></tr>
+            </table>
+            <div class="dsp-t mt-10 mb-5">
+                <div class="dsp-tc w-100"><h3 class="mt-0 mb-0">送稿件数</h3></div>
+                <div class="dsp-tc va-m">00件</div>
+            </div>
+            <table class="tbl w-full highlight">
+                <colgroup>
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th>送稿日</th><th>BA</th><th>担当者</th><th>クライアント</th><th>送稿形態</th><th>新原稿/在版</th><th>原稿形態</th><th>削除</th></tr>
+                <tr class="overlay show_soukou "><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><input type="checkbox" /></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><input type="checkbox" /></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><input type="checkbox" /></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><input type="checkbox" /></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><input type="checkbox" /></td></tr>
+            </table>
+            <h3 class="mb-5">新規登録</h3>
+            <div class="mt-5"><a href="#" class="overlay show_url_popup"><i class="fa fa-lg fa-fw fa-plus"></i>送稿データアップロード</a></div>
+            <table class="tbl w-full highlight">
+                <colgroup>
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th>送稿日</th><th>BA</th><th>担当者</th><th>クライアント</th><th>送稿形態</th><th>新原稿/在版</th><th>原稿形態</th><th>削除</th></tr>
+                <tr class="overlay"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><button href="#">削除</button></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><button href="#">削除</button></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><button href="#">削除</button></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><button href="#">削除</button></td></tr>
+                <tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td class="ta-c"><button href="#">削除</button></td></tr>
+            </table>
+            <div class="mt-5 ta-c">
+                <i class="fa fa-angle-double-up fa-3x" aria-hidden="true"></i>
+            </div>
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr>
+                    <th class="ta-l">送稿日</th>
+                    <td><input class="datepicker w-120 ml-5 mr-10" type="text"></td>
+                    <th class="ta-l">面</th>
+                    <td>
+                        <select class="select-input-text">
+                            <option>○○○</option>
+                            <option>○○○</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="ta-l">送稿担当者</th>
+                    <td>
+                        <div class="dsp-t selectusers">
+                            <div> <button class="overlay show_seluser">選択</button></div>
+                            <div class="dsp-tc">
+                                <ul class="selusers" id="baRepresentatives"></ul>
+                            </div>
+                        </div>    
+                    </td>
+                    <th class="ta-l">営業担当者</th>
+                    <td>
+                        <div class="dsp-t selectusers">
+                            <div> <button class="overlay show_seluser" >選択</button></div>
+                            <div class="dsp-tc">
+                                <ul class="selusers" id="baRepresentatives"></ul>
+                            </div>
+                        </div>  
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <th class="ta-l">送稿形態</th>
+                    <td>
+                        <select class="select-input-text">
+                            <option>○○○</option>
+                            <option>○○○</option>
+                        </select>
+                    </td>
+                    <th class="ta-l">新原稿/在版</th>
+                    <td><label><input type="radio">新原稿</label><label><input type="radio">在版</label></td>
+                </tr>
+                <tr>
+                    <th class="ta-l">原稿形態</th>
+                    <td>
+                        <select>
+                            <option>○○○</option>
+                            <option>○○○</option>
+                        </select>
+                    </td>
+                    <th class="ta-l">製作製版会社</th>
+                    <td>
+                        @*<div class="dsp-t selectusers">
+                            <div> <button class="overlay mr-5 show_seluser">選択</button></div>
+                            <div class="dsp-tc">
+                                <ul class="selusers" id="saleRepresentatives"></ul>
+                            </div>
+                        </div>*@  
+                        <button class="overlay mr-10 show_order_company">選択</button>
+                    </td>
+                </tr>
+                <tr><th class="ta-l">校了日</th><td colspan="3"><input class="datepicker w-120 ml-5 mr-10" type="text"></td></tr>
+                <tr><th class="ta-l">備考</th><td colspan="3"><textarea class="w-full" rows="3"></textarea></td></tr>
+            </table>
+            <div class="mt-10 ta-c">
+                <a class="btn-ok btn-large" href="index.html">追加</a>
+            </div>
+        </div>
+        <h2 class="ttl-h2 tgl-btn">備考欄</h2>
+        <div class="tgl-box">
+            @Html.TextArea("Memo", (string)ViewBag.Memo, 10, 1, new { @class = "w-full" })
+        </div>
+        <h2 class="ttl-h2 tgl-btn">メール送信先一覧</h2>
+        <div class="tgl-box" id="sendmailuser">
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:200px;">
+                    <col style="width:auto;">
+                    <col style="width:auto;">
+                    <col style="width:60px;">
+                </colgroup>
+                <tr>
+                    <th>ユーザ名</th>
+                    <th>部署</th>
+                    <th>メールアドレス</th>
+                    <th></th>
+                </tr>
+            </table>
+            <div class="mt-10"><a href="javascript:void(0);" class="overlay show_seluser"><i class="fa fa-lg fa-fw fa-plus"></i>送信先メールアドレス追加</a></div>
+        </div>
+        <h2 class="ttl-h2 tgl-btn">更新情報メール</h2>
+        <div class="tgl-box mb-20">
+            <div class="mt-5 mb-5">
+                <h3><label><input type="checkbox" />更新情報をメールで知らせる</label></h3>
+            </div>
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:150px;">
+                </colgroup>
+                <tr>
+                    <th class="ta-l">送信先</th>
+                    <td>
+                        <div class="selectusers">
+                            <button class="overlay show_seluser">選択</button><br>
+                            <ul class="selusers" id="mailContents"></ul>
+                        </div>
+                    </td>
+                </tr>
+                <tr><th class="ta-l">タイトル</th><td><input type="text" class="w-600" id="MailSubject"></td></tr>
+                <tr><th class="ta-l">本文</th><td><textarea placeholder="メール本文に追加するコメントを入力してください" class="w-600" id="MailBody"></textarea></td></tr>
+            </table>
+        </div>
+        <div class="mt-20">
+            <span class="cl-ok-700"><i class="fa fa-lg fa-fw fa-exclamation-circle"></i>関係者にメールが送信されます</span><br>
+        </div>
+        <div class="mt-10">
+            <a class="btn-ok btn-large" id="regist" href="#">登録</a>
+        </div>
+    </div>
+    <div class="btn-back">
+        <a href="#"  class="jsBack"><i class="fa fa-lg fa-fw fa-chevron-left" ></i>戻る</a>
+    </div>
+}
+<div class="popup">
+    @Html.Partial("Ledger/ad_company")
+    @Html.Partial("Ledger/user")
+    @Html.Partial("Ledger/order_company")
+    @Html.Partial("Ledger/file_popup")
+</div>

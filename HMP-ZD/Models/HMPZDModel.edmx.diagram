@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf636e5b10cd4c37b9de9777cf722ebd" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="hmpdevModel.Accuracy" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.AdvertisementTypes" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.BARepresentatives" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Colors" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.CooperativeCompany" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.CustomerRepExclusionConditions" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.CustomerReps" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.CustomerRepSearchLogs" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Customers" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.DisplayPeriods" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.ElectronLedgerChangeLog" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.IndustryMidClassifications" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.LockedPeriods" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.MagazineRepresentatives" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.MailDestinations" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.ManuscriptSize" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Organizations" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Pages" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Pictures" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.PressApplicationDeadline" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.PressApplicationDeadlineDay" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.ProductionRepresentatives" Width="1.5" PointX="14.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.ProgressRepresentatives" Width="1.5" PointX="4.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.PublisherResponsibleGroups" Width="1.5" PointX="14.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Reads" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.SaleRepresentatives" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Shutdown" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.TeamRepresentatives" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Teams" Width="1.5" PointX="16.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.TransmissionCount" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.TransmissionForms" Width="1.5" PointX="12.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.UptakeLogs" Width="1.5" PointX="6.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.UserPermissions" Width="1.5" PointX="14.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Users" Width="1.5" PointX="16.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.VehicleExclusionConditions" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.VehicleExclusionDatas" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Vehicles" Width="1.5" PointX="18.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.VehicleSchedules" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.IndustryLargeClassifications" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.Information" Width="1.5" PointX="8.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hmpdevModel.ProgressSchedules" Width="1.5" PointX="11.375" PointY="20.75" />
+        <EntityTypeShape EntityType="hmpdevModel.ProgressTimetable" Width="1.5" PointX="19.375" PointY="20.75" />
+        <EntityTypeShape EntityType="hmpdevModel.sysdiagrams" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="hmpdevModel.AdvertisementValues" Width="1.5" PointX="3.375" PointY="19.75" />
+        <EntityTypeShape EntityType="hmpdevModel.MailContents" Width="1.5" PointX="21.375" PointY="3.75" />
+        <EntityTypeShape EntityType="hmpdevModel.ElectronLedger" Width="1.5" PointX="0.75" PointY="12.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

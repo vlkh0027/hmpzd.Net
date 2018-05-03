@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "ステータス編集";
+    ViewBag.Header = HeaderMenu.Admin;
+}
+<script src="~/Scripts/edit.js"></script>
+<script src="~/Scripts/page/Accuracy.js"></script>
+
+	<div class="cotent-inner02 mt-20">
+        <form class="jsRegForm">
+        <input type="hidden" name="ID" value="@ViewBag.ID" />
+            <table class="tbl w-600">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr>
+                    <th class="required ta-l">表示順</th>
+                    <td>
+                        <input type="text" name="Order" value="@ViewBag.Order"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="required ta-l">ステータス</th>
+                    <td>
+                        <input type="text" name="AccuracyName" value="@ViewBag.AccuracyName"/>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+		<div class="mt-20"><a href="#" class="btn-ok btn-large jsReg">登録</a></div>
+		<div class="btn-back">
+			<a href="#" class="jsBack"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+		</div>
+	</div>

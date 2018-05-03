@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "チーム担当編集";
+    ViewBag.Header = HeaderMenu.Admin;
+}
+<script src="~/Scripts/edit.js"></script>
+<script src="~/Scripts/page/Team.js"></script>
+	<div class="cotent-inner02 mt-20">
+        <form class="jsRegForm">
+        <input type="hidden" name="ID" value="@ViewBag.ID" />
+            <table class="tbl w-600">
+                <colgroup>
+                    <col style="width:150px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr>
+                    <th class="required ta-l">部署</th>
+                    <td>
+                        @Html.DropDownList("DepartmentID", (List<SelectListItem>)ViewBag.DepartmentList, "選択してください")
+                    </td>
+                    </tr>
+                <tr>
+                    <th class="required ta-l">チーム</th>
+                    <td>
+                        @Html.DropDownList("TeamID", (List<SelectListItem>)ViewBag.TeamList, "選択してください")
+                    </td>
+                </tr>
+                <tr>
+                    <th class="required ta-l">担当</th>
+                    <td>
+                        <button class="jsShowUserSelect">選択</button>
+                        @{
+                        if (!String.IsNullOrWhiteSpace(ViewBag.UserID))
+                        {
+                        <span>@ViewBag.LastName @ViewBag.FirstName<input type="hidden" name="UserIDList" value="@ViewBag.UserID"/></span>
+                        }
+
+                        }
+                        @*                        <span>
+                ○○○○ ○○○○
+            </span>
+                        *@
+                    </td>
+                </tr>
+            </table>
+        </form>
+		<div class="mt-20"><a href="#" class="btn-ok btn-large jsReg">登録</a></div>
+		<div class="btn-back">
+			<a href="#" class="jsBack"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+		</div>
+	</div>

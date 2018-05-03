@@ -1,0 +1,184 @@
+﻿<script type="text/javascript">
+$(function(){
+	$(".overlay").click(function() {
+        val = $(this).attr("data-href");
+		$("#overlay-content").load(val);
+		return false;
+	});
+		
+	$(".other-text").hide();
+	$(".other").click(function () {
+		$(this).next(".other-text").slideDown("fast");
+    });
+
+    $('.setUser').on('click', function () {
+        $(this).parent().find('.user').val('@ViewBag.UserName');
+
+        var now = new Date();
+        var mmdd = now.getFullYear() + '/' + 
+                   ('0' + (now.getMonth() + 1)).slice(-2) + '/' + 
+                   ('0' + now.getDate()).slice(-2);
+        $(this).parent().find('.datepicker').val(mmdd);
+    });
+});
+</script>
+<div class="box-info01">
+	<dl class="w-full">
+		<dt class="pt-30">ステータス</dt>
+		<dd>
+			<ul class="btn-status-list">
+				<li><a href="#">起票</a>
+                    @if(ViewBag.ActionType == ActionType.New)
+                    {
+                        <span>@(DateTime.Now.ToString("yyyy/MM/dd"))</span><br />
+                        <span>@ViewBag.UserName</span>
+                    }
+                    else if(ViewBag.ActionType == ActionType.Edit)
+                    {
+                        <span>@ViewBag.IssuanceStatus</span><br />
+                        <span>@ViewBag.IssuanceUser</span>
+                    }
+                </li>
+				<li><a class="setUser" href="javascript:void(0);">HEN受付</a><span>@Html.TextBox("ReportDate", (string)ViewBag.ReportDate, new { @class="datepicker w-120" })<br />@Html.TextBox("ReportUser", (string)ViewBag.ReportUser, new { @class="user", placeholder = "担当者を入力" })</span></li>
+				<li><a class="setUser" href="javascript:void(0);">BA受注</a><span>@Html.TextBox("BAOrderDate", (string)ViewBag.BAOrderDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("BAOrderUser", (string)ViewBag.BAOrderUser, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+				<li><a class="setUser" href="javascript:void(0);">媒体社申込</a><span>@Html.TextBox("CustomerApplicationDate", (string)ViewBag.CustomerApplicationDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("CustomerApplicationUser", (string)ViewBag.CustomerApplicationUser, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+				<li><a class="setUser" href="javascript:void(0);">送稿担当者受付</a><span>@Html.TextBox("SubmitReceptDate", (string)ViewBag.SubmitReceptDate, new { @class = "datepicker w-120" })<br />@Html.TextBox("SubmitReceptUser", (string)ViewBag.SubmitReceptUser, new { @class = "user", placeholder = "担当者を入力" })</span></li>
+				<li><a href="#">発注メール</a><span>@ViewBag.MailDate<br />@ViewBag.MailUser</span></li>
+				<li class="ml-20"><a href="#" class="pe-none">ステータス</a>
+                    @Html.DropDownList("Stop", (List<SelectListItem>)ViewBag.StopItems, "選択してください")
+				</li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+<div class="box-info02">
+	<dl>
+		<dt>伝票番号</dt>
+		<dd>
+			<span>0000000000</span>&nbsp;<button class="ml-40">自分を担当者に設定</button>
+		</dd>
+		<dt>部署</dt>
+		<dd>
+            @Html.DropDownList("Department", (List<SelectListItem>)ViewBag.DepartmentItems, "選択してください")
+		</dd>
+		<dt>担当チーム</dt>
+		<dd>
+            @Html.DropDownList("ChargeTeam", (List<SelectListItem>)ViewBag.ChargeTeamItems, "選択してください")
+		</dd>
+		<dt>媒体社</dt>
+		<dd>
+            @Html.DropDownList("CustomerID", (List<SelectListItem>)ViewBag.CustomerIDItems, "選択してください")
+			<a href="#"  class="other ml-10">その他</a>
+			<div class="other-text" >
+                @Html.TextBox("CustomerFree", (string)ViewBag.CustomerFree, new { @class="mt-5 w-300" })
+			</div>
+		</dd>
+		<dt>媒体誌</dt>
+		<dd>
+            @Html.DropDownList("VehicleID", (List<SelectListItem>)ViewBag.VehicleIDItems, "選択してください")
+			<a href="#"  class="other ml-10">その他</a>
+			<div class="other-text" >
+                @Html.TextBox("VehicleFree", (string)ViewBag.VehicleFree, new { @class="mt-5 w-300" })
+			</div>
+		</dd>
+		<dt>発売日</dt>
+		<dd>
+            @Html.TextBox("ReleaseDate", (string)ViewBag.ReleaseDate, new { @class="datepicker" })
+		</dd>
+	</dl>
+	<dl>
+		<dt>広告主</dt>
+		<dd>
+			<button class="overlay mr-10" data-href="../../Popup/Ledger/ad_company.html">選択</button><span id="company">○○○○社</span>
+		</dd>
+		<dt>業種（大）</dt>
+		<dd>
+			流通・小売
+		</dd>
+		<dt>件名</dt>
+		<dd>
+            @Html.TextBox("Subject", (string)ViewBag.Subject)
+		</dd>
+	</dl>
+</div>
+<div class="box-info02">
+	<dl>
+		<dt>営業担当者</dt>
+		<dd>
+			<div class="dsp-t">
+				<div class="dsp-tc w-60"><button class="overlay" data-href="../../Popup/Ledger/user.html">選択</button></div>
+				<div class="dsp-tc">
+                    <span id="hoge">ageee</span>
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+				</div>
+			</div>
+		</dd>
+		<dt>雑誌部担当者</dt>
+		<dd>
+			<div class="dsp-t">
+				<div class="dsp-tc w-60"><button class="overlay" data-href="../../Popup/Ledger/user.html">選択</button></div>
+				<div class="dsp-tc">
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+				</div>
+			</div>
+		</dd>
+	</dl>
+	<dl>
+		<dt>制作担当者</dt>
+		<dd>
+			<div class="dsp-t">
+				<div class="dsp-tc w-60"><button class="overlay" data-href="../../Popup/Ledger/user.html">選択</button></div>
+				<div class="dsp-tc">
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+				</div>
+			</div>
+		</dd>
+		<dt>進行部担当者</dt>
+		<dd>
+			<div class="dsp-t">
+				<div class="dsp-tc w-60"><button class="overlay" data-href="../../Popup/Ledger/user.html">選択</button></div>
+				<div class="dsp-tc">
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+					会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+				</div>
+			</div>
+		</dd>
+	</dl>
+</div>
+<div class="box-info02">
+	<dl class="w-full">
+		<dt></dt>
+		<dd>
+			<div class="dsp-t">
+                @foreach(var item in (List<SelectListItem>)ViewBag.AdvertisementTypes)
+                {
+    				<div class="dsp-tc w-120">
+                        <label><input type="checkbox"value="@item.Value" />@item.Text</label>
+                    </div>
+                    <div class="dsp-tc w-160">
+                        画：
+                        @Html.DropDownList("Pic", (List<SelectListItem>)ViewBag.PictureItems, new { })
+                    </div>
+                    <div class="dsp-tc w-160">
+                        色：
+                        @Html.DropDownList("Col", (List<SelectListItem>)ViewBag.ColorItems)
+                    </div>
+                    <div class="dsp-tc w-200">
+                        ページ：
+                        @Html.DropDownList("Pag", (List<SelectListItem>)ViewBag.PageItems)
+                    </div>
+
+                    if(item.Text == "純広告")
+                    {
+                        <label>電子マガジン<input type="checkbox" /></label>
+                    }
+                }
+			</div>
+		</dd>
+	</dl>
+</div>
+<div id="overlay-content">
+</div>

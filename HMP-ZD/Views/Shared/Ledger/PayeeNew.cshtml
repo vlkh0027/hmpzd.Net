@@ -1,0 +1,41 @@
+﻿<h2 class="ttl-h2 tgl-btn mt-0 on">支払情報</h2>
+<div class="tgl-box on">
+	<div class="pt-20 pb-20">計上年月日@(Html.TextBox("RecordingDate", (string)ViewBag.RecordingDate, new { @class = "datepicker w-120 ml-5 mr-10" }))</div>
+	<table class="tbl">
+		<colgroup>
+			<col style="width:100px;">
+			<col style="width:100px;">
+		</colgroup>
+		<tr><th class="ta-l">コミッション</th><td>@Html.TextBox("CommissionRate", (string)ViewBag.CommissionRate)</td></tr>
+	</table>
+	<table class="tbl w-full">
+		<colgroup>
+			<col style="width:150px;">
+			<col style="width:200px;">
+			<col style="width:200px;">
+			<col style="width:200px;">
+			<col style="width:auto;">
+		</colgroup>
+		<tr><th></th><th>支払金額グロス</th><th>料率</th><th>支払金額ネット</th><th>コメント</th></tr>
+		<tr><th class="ta-l">掲載料</th><td>@Html.TextBox("PublicationFeeGross", (string)ViewBag.PublicationFeeGross, new { @class = "w-full" })</td><td>@Html.TextBox("PublicationFeeRate", (string)ViewBag.PublicationFeeRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("PublicationFeeComment", (string)ViewBag.PublicationFeeComment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-l">制作料</th><td>@Html.TextBox("ProductionFeeGross", (string)ViewBag.ProductionFeeGross, new { @class = "w-full" })</td><td>@Html.TextBox("ProductionFeeRate", (string)ViewBag.ProductionFeeRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("ProductionFeeComment", (string)ViewBag.ProductionFeeComment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-r bg-hk-700">その他1</th><td>@Html.TextBox("Other1Gross", (string)ViewBag.Other1Gross, new { @class = "w-full" })</td><td>@Html.TextBox("Other1Rate", (string)ViewBag.Other1Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("Other1Comment", (string)ViewBag.Other1Comment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-r bg-hk-700">その他2</th><td>@Html.TextBox("Other2Gross", (string)ViewBag.Other2Gross, new { @class = "w-full" })</td><td>@Html.TextBox("Other2Rate", (string)ViewBag.Other2Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("Other2Comment", (string)ViewBag.Other2Comment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-r bg-hk-700">その他3</th><td>@Html.TextBox("Other3Gross", (string)ViewBag.Other3Gross, new { @class = "w-full" })</td><td>@Html.TextBox("Other3Rate", (string)ViewBag.Other3Rate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("Other3Comment", (string)ViewBag.Other3Comment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-l">その他</th><td class="ta-r bg-hk-300">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("OtherComment", (string)ViewBag.OtherComment, new { @class="w-full" })</td></tr>
+		<tr><th class="ta-l">払い金額合計</th><td class="ta-r bg-hk-300">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">0</td><td><input class="w-full" type="text"></td></tr>
+		<tr><th class="ta-l">媒体収益</th><td>@Html.TextBox("MediaRevenueGross", (string)ViewBag.MediaRevenueGross, new { @class = "w-full" })</td><td>@Html.TextBox("MediaRevenueRate", (string)ViewBag.MediaRevenueRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("MediaRevenueComment", (string)ViewBag.MediaRevenueComment, new { @class="w-full" })</td></tr>
+		<tr><th class="ta-l">媒体戦略原価B</th><td>@Html.TextBox("StrategicCostBGross", (string)ViewBag.StrategicCostBGross, new { @class = "w-full" })</td><td>@Html.TextBox("StrategicCostBRate", (string)ViewBag.StrategicCostBRate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("StrategicCostBComment", (string)ViewBag.StrategicCostBComment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-l">媒体戦略原価A</th><td>@Html.TextBox("StrategicCostAGross", (string)ViewBag.StrategicCostAGross, new { @class = "w-full" })</td><td>@Html.TextBox("StrategicCostARate", (string)ViewBag.StrategicCostARate, new { @class = "w-100" })%</td><td class="ta-r bg-hk-300">0</td><td>@Html.TextBox("StrategicCostAComment", (string)ViewBag.StrategicCostBComment, new { @class = "w-full" })</td></tr>
+		<tr><th class="ta-l">引渡し建値</th><td class="ta-r bg-hk-300">0</td><td class="bg-hk-300"></td><td class="ta-r bg-hk-300">0</td><td><input class="w-full" type="text"></td></tr>
+		<tr><th class="ta-l">納品日</th><td colspan="4"><input class="datepicker w-120" type="text"></td></tr>
+		<tr><th class="ta-l">備考</th><td colspan="4"><textarea class="w-full"></textarea></td></tr>
+	</table>
+	<table class="tbl mt-10">
+		<colgroup>
+			<col style="width:200px;">
+			<col style="width:200px;">
+		</colgroup>
+		<tr><th class="ta-l">PM（売り上げ）</th><td class="ta-r">0</td></tr>
+	</table>
+</div>

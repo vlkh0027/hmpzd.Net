@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "ステータス一覧";
+    ViewBag.Header = HeaderMenu.Admin;
+}
+<script src="~/Scripts/edit.js"></script>
+<script src="~/Scripts/grid.js"></script>
+<script src="~/Scripts/page/Accuracy.js"></script>
+
+<ul class="btn-edit-list-top">
+    <li><a class="btn-st btn-normal jsNew" href="#">新規登録</a></li>
+</ul>
+<div class="cotent-inner02">
+    @*
+
+                <div>
+            <form class="jsGridSearchForm">
+                <input type="text" name="S_WORDS" value="@ViewBag.S_WORDS" /><a class="btn-hk btn-small ml-5 jsGridSearch" href="#">検索</a>
+            </form>
+        </div>
+    *@
+        <div class="mt-10 pl-10 jsGridSearchResult">
+            00件見つかりました。
+        </div>
+    
+    <div class="jsGrid" style="width:1890px;height:546px;"></div>
+    @*
+        <table class="tbl w-full mt-20 highlight h-stripe-odd">
+            <colgroup>
+                <col style="width:80px;">
+                <col style="width:auto;">
+                <col style="width:60px;">
+            </colgroup>
+            <tr><th>表示順</th><th>ステータス</th><th></th></tr>
+            <tr data-href="status_edit.html"><td class="ta-c">1</td><td>決定</td><td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td></tr>
+            <tr data-href="status_edit.html"><td class="ta-c">2</td><td>中止</td><td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td></tr>
+        </table>
+    *@
+
+        <div class="pager">
+            <div class="jsGridPager"></div>
+            <div class="mt-5 ta-c jsGridSearchResult2">
+                00000件中 00件-00件
+            </div>
+        </div>
+
+    <div class="btn-back">
+        <a href="/Admin"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+    </div>
+</div>

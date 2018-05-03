@@ -1,0 +1,247 @@
+﻿@{
+    // Work Controller
+    ViewBag.Title = "WEB登録";
+    ViewBag.Header = HeaderMenu.Index;
+    ViewBag.LedgerType = LedgerType.Work;
+    ViewBag.ActionType = ActionType.New;
+}
+<script src="~/Scripts/magledger.js"></script>
+
+<div class="box-info01">
+    <dl class="w-full">
+        <dt class="pt-30">ステータス</dt>
+        <dd>
+            <ul class="btn-status-list">
+                <li><a href="#">起票</a><span>yyyy/mm/dd<br />営業 太郎</span></li>
+                <li><a href="#">HEN受付</a><span><input class="datepicker w-120" type="text"><br /><input type="text" placeholder="担当者を入力"></span></li>
+                <li><a href="#">BA受注</a><span><input class="datepicker w-120" type="text"><br /><input type="text" placeholder="担当者を入力"></span></li>
+                <li><a href="#">媒体社申込</a><span><input class="datepicker w-120" type="text"><br /><input type="text" placeholder="担当者を入力"></span></li>
+                <li><a href="#">送稿担当者受付</a><span><input class="datepicker w-120" type="text"><br /><input type="text" placeholder="担当者を入力"></span></li>
+                <li><a href="#">発注メール</a><span>&nbsp;<br />&nbsp;</span></li>
+                <li class="ml-20">
+                    <a href="#" class="pe-none">ステータス</a>
+                    <select>
+                        <option value="選択してください">選択してください</option>
+                        <option value="">仮登録</option>
+                        <option value="">決定</option>
+                        <option value="">中止</option>
+                    </select>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+</div>
+<div class="box-info02">
+    <dl>
+        <dt>伝票番号</dt>
+        <dd>
+            0000000000 <button class="ml-40">自分を担当者に設定</button>
+        </dd>
+        <dt>発注先</dt>
+        <dd>
+            <button class="overlay mr-10 order_company">選択</button>○○○○社
+        </dd>
+        <dt>納品日</dt>
+        <dd><input type="text" class="datepicker" value="" /></dd>
+        <dt>発注内容</dt>
+        <dd>
+            <input type="text" class="w-full">
+        </dd>
+    </dl>
+    <dl>
+        <dt>広告主</dt>
+        <dd>
+            <button class="overlay mr-10" data-href="ad_company_popup.html ">選択</button>○○○○社
+        </dd>
+        <dt>業種（大）</dt>
+        <dd>
+            流通・小売
+        </dd>
+    </dl>
+</div>
+<div class="box-info02">
+    <dl>
+        <dt>営業担当者</dt>
+        <dd>
+            <div class="dsp-t selectusers">
+                <div class="dsp-tc w-60"><button class="overlay show_seluser">選択</button></div>
+                <div class="dsp-tc">
+                    <ul class="selusers"></ul>
+                </div>
+            </div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>雑誌部担当者</dt>
+        <dd>
+            <div class="dsp-t selectusers">
+                <div class="dsp-tc w-60"><button class="overlay show_seluser">選択</button></div>
+                <div class="dsp-tc">
+                    <ul class="selusers"></ul>
+                </div>
+            </div>
+        </dd>
+    </dl>
+</div>
+<div class="cotent-inner02 mt-20">
+    <h2 class="ttl-h2 tgl-btn mt-0 on">支払情報</h2>
+    <div class="tgl-box on">
+        <div class="pt-20 pb-20">計上年月日<input class="datepicker w-120 ml-5 mr-10" type="text"></div>
+        <table class="tbl">
+            <colgroup>
+                <col style="width:200px;">
+                <col style="width:250px;">
+            </colgroup>
+            <tr><th class="ta-l">売上金額</th><td><input type="text" class="w-full" /></td></tr>
+        </table>
+        <div class="mt-5 mb-5 w-200 va-m ta-c">＋</div>
+        <div class="dsp-tc">
+
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:300px;">
+                    <col style="width:150px;">
+                    <col style="width:170px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                </colgroup>
+                <tr><th>支払先</th><th>業者登録期限</th><th>納期</th><th>原価項目</th><th>支払原価</th><th>支払原価計</th></tr>
+                <tr><td>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td rowspan="10" class="ta-r">000,000,000</td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c" style="color: red;">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c" style="color: orange;">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+                <tr><td><button class="overlay mr-10 order_company">選択</button>○○○○社</td><td class="ta-c">～yyyy/mm/dd</td><td class="ta-c"><input class="datepicker w-120 mr-10" type="text"></td><td><input class="w-full" type="text" placeholder="" value="" /></td><td><input class="w-full" type="text" placeholder="" value="" /></td></tr>
+            </table>
+
+        </div>
+        <div class="mt-5 mb-5 w-200 va-m ta-c">＝</div>
+        <table class="tbl">
+            <colgroup>
+                <col style="width:200px;">
+                <col style="width:250px;">
+            </colgroup>
+            <tr><th class="ta-l">営収益</th><td class="ta-r">000,000,000</td></tr>
+            <tr><th class="ta-l">営収率</th><td class="ta-r">00.00%</td></tr>
+            <tr><th class="ta-l">納品日</th><td><input class="datepicker w-120 mr-10" type="text"></td></tr>
+            <tr><th class="ta-l">備考</th><td><textarea class="w-full"></textarea></td></tr>
+        </table>
+    </div>
+    <h2 class="ttl-h2 tgl-btn">メール送信先一覧</h2>
+    <div class="tgl-box">
+
+
+        <table class="tbl w-full">
+            <colgroup>
+                <col style="width:200px;">
+                <col style="width:auto;">
+                <col style="width:auto;">
+                <col style="width:60px;">
+            </colgroup>
+            <tr>
+                <th>ユーザ名</th>
+                <th>部署</th>
+                <th>メールアドレス</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>白鳳&#12288;太郎</td>
+                <td>博報堂DYMP雑誌局業務推進二部</td>
+                <td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+                <td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+            </tr>
+            <tr>
+                <td>xxxxxxx</td>
+                <td>xxxxxxx</td>
+                <td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+                <td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+            </tr>
+            <tr>
+                <td>xxxxxxx</td>
+                <td>xxxxxxx</td>
+                <td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+                <td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+            </tr>
+        </table>
+
+
+        <div class="mt-10"><a href="#" class="overlay show_seluser"><i class="fa fa-lg fa-fw fa-plus"></i>送信先メールアドレス追加</a></div>
+    </div>
+    <h2 class="ttl-h2 tgl-btn">アクセス権一覧</h2>
+    <div class="tgl-box box-scroll">
+
+        <table class="tbl w-full">
+            <colgroup>
+                <col style="width:200px;">
+                <col style="width:auto;">
+                <col style="width:auto;">
+                <col style="width:120px;">
+            </colgroup>
+            <tr>
+                <th>ユーザ名</th>
+                <th>部署</th>
+                <th>メールアドレス</th>
+                <th>権限</th>
+            </tr>
+            <tr>
+                <td>白鳳&#12288;太郎</td>
+                <td>博報堂DYMP雑誌局業務推進二部</td>
+                <td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+                <td>雑誌1部<br>雑誌2部<br>雑誌3部<br>業務推進部<br>雑誌進行部<br>局長席<br></td>
+            </tr>
+            <tr>
+                <td>×××××××</td>
+                <td>×××××××</td>
+                <td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+                <td>局長席<br>管理者<br></td>
+            </tr>
+        </table>
+
+    </div>
+    <h2 class="ttl-h2 tgl-btn">備考欄</h2>
+    <div class="tgl-box">
+        <textarea class="w-full" rows="10"></textarea>
+    </div>
+    <h2 class="ttl-h2 tgl-btn">更新情報メール</h2>
+    <div class="tgl-box mb-20">
+        <div class="mt-5 mb-5">
+            <h3><label><input type="checkbox" />更新情報をメールで知らせる</label></h3>
+        </div>
+
+        <table class="tbl w-full">
+            <colgroup>
+                <col style="width:150px;">
+            </colgroup>
+            <tr>
+                <th class="ta-l">送信先</th>
+                <td>
+                    <button class="overlay show_seluser">選択</button><br>
+                    会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+                    会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+                </td>
+            </tr>
+            <tr><th class="ta-l">タイトル</th><td><input type="text" class="w-600"></td></tr>
+            <tr><th class="ta-l">本文</th><td><textarea placeholder="メール本文に追加するコメントを入力してください" class="w-600"></textarea></td></tr>
+        </table>
+
+    </div>
+    <div class="mt-20">
+        <span class="cl-ok-700"><i class="fa fa-lg fa-fw fa-exclamation-circle"></i>関係者にメールが送信されます</span><br>
+    </div>
+    <div class="mt-10">
+        <a class="btn-ok btn-large" href="index.html">登録</a>
+    </div>
+</div>
+<div class="btn-back">
+    <a href="index.html"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+</div>
+
+<div class="popup">
+    @Html.Partial("Ledger/user")
+    @Html.Partial("Ledger/order_company")
+</div>

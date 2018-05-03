@@ -1,0 +1,41 @@
+﻿
+<script type="text/javascript">
+$(function(){
+	//Overlay
+	$("#overlay,.mdl-btn-close,.mdl-btn-cancel").on("click", function() {
+		$("#overlay").remove();
+		$(".mdl").remove();
+	});
+});
+</script>
+<div id="overlay"></div>
+<div class="mdl w-960">
+    <div class="mdl-btn-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></div>
+    <div class="mdl-content">
+        <h2 class="cl-ci-600">システムメンテナンスのお知らせ</h2>
+        <div class="mb-40">
+            <p class="p-5 bg-ci-50 pb-20">
+                システムメンテナンスの為、下記の日程は電子台帳システムをご利用いただくことができません。<br>
+                <br>
+                <strong class="cl-ci-600">・2018年 3月31日 17:00～21:00</strong>
+            </p>
+        </div>
+        <h2 class="mb-0">お知らせ</h2>
+        <ul class="ta-r">
+            <li><a class="btn-st btn-normal" href="@Url.Action("Index", "Top")">一覧</a></li>
+        </ul>
+        <div class="mt-10 box-scroll">
+            <p class="p-5">
+                こちらは新電子台帳システムになります。<br>
+                旧電子台帳システムとは以下の点が異なっていますのでご注意ください。<br>
+                <br>
+                ・テキストテキストテキストテキストテキストテキストテキスト<br>
+                ・テキストテキストテキストテキスト<br>
+                ・テキストテキストテキストテキストテキストテキスト<br>
+                ・テキストテキストテキストテキストテキスト<br>
+            </p>
+        </div>
+    </div>
+    <div class="ta-c pt-20"><a class="btn-ok btn-normal mdl-btn-cancel">了解</a></div>
+</div>
+

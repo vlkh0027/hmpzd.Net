@@ -1,0 +1,64 @@
+﻿<script type="text/javascript">
+$(function(){
+	$(".overlay").click(function() {
+		val = $(this).attr("data-href");
+		$("#overlay-content").load(val);
+		return false;
+	});
+		
+	$(".other-text").hide();
+	$(".other").click(function () {
+		$(this).next(".other-text").slideDown("fast");
+	});
+});
+</script>
+<h2 class="ttl-h2 tgl-btn">進行部情報</h2>
+<div class="tgl-box">
+	<table class="tbl w-full">
+		<colgroup>
+			<col style="width:150px;">
+			<col style="width:auto;">
+			<col style="width:150px;">
+			<col style="width:auto;">
+			<col style="width:150px;">
+			<col style="width:auto;">
+		</colgroup>
+		<tr><th class="ta-l">校了日</th><td>@Html.TextBox("CalibrationDate", (string)ViewBag.CalibrationDate, new { @class = "datepicker mr-5" })</td><th class="ta-l">送稿日</th><td colspan="3">@Html.TextBox("TransmissionDate", (string)ViewBag.TransmissionDate, new { @class = "datepicker mr-5" })</td></tr>
+		<tr><th class="ta-l">送稿方法</th><td><label>@Html.RadioButton("TransmissionMethod", 1, ((int?)ViewBag.TransmissionMethod == 1))オンライン</label><label>@Html.RadioButton("TransmissionMethod", 2, ((int?)ViewBag.TransmissionMethod == 2))オフライン</label></td>
+        <th class="ta-l">送稿形態</th>
+			<td>
+                @Html.DropDownList("TransmissionForm", (List<SelectListItem>)ViewBag.TransmissionFormItems)
+			</td>
+		<th class="ta-l">新原稿/在版</th><td><label>@Html.RadioButton("DocumentType", 1, ((int?)ViewBag.DocumentType == 1))新原稿</label><label>@Html.RadioButton("DocumentType", 2, ((int?)ViewBag.DocumentType == 2))在版</label></td></tr>
+		<tr><th class="ta-l">BA担当者</th>
+			<td colspan="5">
+				<button class="overlay" data-href="../../Popup/Ledger/user.html">選択</button><br>
+				会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+				会社名 部門グループ 部門 部署 ユーザー名 <a href="#"><i class="fa fa-lg fa-fw fa-times"></i></a><br>
+			</td>
+		</tr>
+		<tr><th class="ta-l">出版担当者</th><td colspan="5">@Html.TextBox("PublisherRepresentative", (string)ViewBag.PublisherRepresentative)</td></tr>
+		<tr><th class="ta-l">メモ</th><td colspan="5">@Html.TextArea("ProgressMemo", (string)ViewBag.ProgressMemo, 4, 1, new { @class="w-full" })</td></tr>
+	</table>
+	<h3 class="mb-5">送稿件数</h3>
+	<table class="tbl w-full highlight">
+		<colgroup>
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+		</colgroup>
+		<tr><th>送稿日</th><th>BA</th><th>担当者</th><th>クライアント</th><th>送稿形態</th><th>新原稿/在版</th><th>原稿形態</th></tr>
+		<tr class="overlay" data-href="../../Popup/Ledger/soukou.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+		<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+		<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+		<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+		<tr class="overlay" data-href="soukou_popup.html"><td class="ta-c">yyyy/mm/dd</td><td>○○○○○○○</td><td>○○○○○○</td><td>○○○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td><td>○○○○○○</td></tr>
+	</table>
+	<div class="mt-10"><a href="#" data-href="../../Popup/Ledger/file.html" class="overlay"><i class="fa fa-lg fa-fw fa-plus"></i>送稿データアップロード</a></div>
+</div>
+<div id="overlay-content">
+</div>

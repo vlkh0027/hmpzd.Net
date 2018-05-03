@@ -1,0 +1,52 @@
+﻿<script type="text/javascript">
+$(function(){
+	$(".overlay").click(function() {
+		val = $(this).attr("data-href");
+		$("#overlay-content").load(val);
+		return false;
+	});
+		
+	$(".other-text").hide();
+	$(".other").click(function () {
+		$(this).next(".other-text").slideDown("fast");
+	});
+});
+</script>
+<h2 class="ttl-h2 tgl-btn">メール送信先一覧</h2>
+<div class="tgl-box">
+	<table class="tbl w-full">
+		<colgroup>
+			<col style="width:200px;">
+			<col style="width:auto;">
+			<col style="width:auto;">
+			<col style="width:60px;">
+		</colgroup>
+		<tr>
+			<th>ユーザ名</th>
+			<th>部署</th>
+			<th>メールアドレス</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>白鳳&#12288;太郎</td>
+			<td>博報堂DYMP雑誌局業務推進二部</td>
+			<td><a href="mailto:tarou.hakuho@hakuhoudody-holdings.co.jp">tarou.hakuho@hakuhoudody-holdings.co.jp</a></td>
+			<td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+		</tr>
+		<tr>
+			<td>×××××××</td>
+			<td>×××××××</td>
+			<td></td>
+			<td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+		</tr>
+		<tr>
+			<td>×××××××</td>
+			<td>×××××××</td>
+			<td></td>
+			<td class="ta-c"><a class="btn-hk btn-small" href="#">削除</a></td>
+		</tr>
+	</table>
+	<div class="mt-10"><a href="#" data-href="../../Popup/Ledger/user.html" class="overlay"><i class="fa fa-lg fa-fw fa-plus"></i>送信先メールアドレス追加</a></div>
+</div>
+<div id="overlay-content">
+</div>

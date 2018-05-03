@@ -1,0 +1,40 @@
+﻿<script src="~/Scripts/order_company.js"></script>
+<div id="order_company" hidden>
+    <div class="mdl w-960">
+        <div class="mdl-btn-close"><a href="javascript:void(0);"><i class="fa fa-fw fa-close"></i></a></div>
+        <div class="txt-h">発注先 選択</div>
+        <div class="mdl-content">
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:200px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th>発注先</th><td><input class="w-full" id="query" type="text" /></td></tr>
+            </table>
+            <div class="ta-c pt-20"><a href="javascript:void(0);" class="btn-hk btn-normal" id="search">検索</a></div>
+            @*<p class="mt-20" id="searchOrderResult">検索結果 5件該当しました。</p>*@
+            <div class="box-scroll">
+                <table class="tbl w-full" id="result_ordercompany">
+                    <colgroup>
+                        <col style="width:auto;">
+                        <col style="width:140px;">
+                        <col style="width:60px;">
+                    </colgroup>
+                    <tr><th>@*発注先*@Nhà Cung Cấp</th><th>@*期限*@Ngày hết hạn</th><th></th></tr>
+                </table>
+            </div>
+            <h2 class="ttl-h2 tgl-btn">その他</h2>
+            <div class="tgl-box">
+                <table class="tbl w-600">
+                    <colgroup>
+                        <col style="width:auto;">
+                        <col style="width:60px;">
+                    </colgroup>
+                    <tr><th>発注先</th><th></th></tr>
+                    <tr><td><input class="w-full" type="text" /></td><td class="ta-c"><a id="other" href="#" class="btn-ok btn-small ">追加</a></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="ta-c pt-20"><a href="#" class="btn-hk btn-normal mdl-btn-cancel">キャンセル</a></div>
+    </div>
+</div>

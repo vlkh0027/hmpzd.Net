@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="format-detection" content="telephone=no">
+    <title>@ViewBag.Title | 雑誌局電子台帳</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/dev.css" />
+    <script charset="utf-8" type="text/javascript" src="/Scripts/jquery-3.2.0.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/Scripts/plugins.js"></script>
+    <script charset="utf-8" type="text/javascript" src="/Scripts/select2.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/uri/URI.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/underscorejs/underscore-min.js"></script>
+
+    @* slickgrid *@
+    <link rel="stylesheet" href="~/css/slick.grid.custom.css" />
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/lib/jquery.event.drag-2.3.0.js"></script>
+    @* 列並べ替え対応 *@
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/plugins/slick.autotooltips.js"></script>
+    @*
+        <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/plugins/slick.rowmovemanager.js"></script>
+        <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/plugins/slick.rowselectionmodel.js"></script>
+    *@
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/slick.core.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/slickgrid/slick.grid.js"></script>
+
+
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/common.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Scripts/modal.js"></script>
+</head>
+<body>
+    <header id="header">
+        <div id="txt-h1"><a href="index.html">雑誌局電子台帳</a></div>
+        <div id="header_user">
+            <span class="header_user-name"><i class="fa fa-user" aria-hidden="true"></i>山田 太郎</span>
+            <a href="logout.html">ログアウト</a>
+        </div>
+        <ul>
+            <li><a href="~/Ledger/Top" class="@((ViewBag.Header == HeaderMenu.Index) ? "current" : "")">電子台帳</a></li>
+            <li><a href="~/Aggregate" class="@((ViewBag.Header == HeaderMenu.Aggregate) ? "current" : "")">集計</a></li>
+            <li><a href="~/Customer" class="@((ViewBag.Header == HeaderMenu.Customer) ? "current" : "")">得意先検索</a></li>
+            <li><a href="~/MagSearch" class="@((ViewBag.Header == HeaderMenu.MagSearch) ? "current" : "")">雑誌検索</a></li>
+            <li><a href="~/Schedule" class="@((ViewBag.Header == HeaderMenu.Schedule) ? "current" : "")">進行スケジュール</a></li>
+            <li><a href="~/Press" class="@((ViewBag.Header == HeaderMenu.Close) ? "current" : "")">掲載誌申込締切</a></li>
+            <li><a href="~/Information" class="@((ViewBag.Header == HeaderMenu.Information) ? "current" : "")">お知らせ</a></li>
+            <li><a href="~/History" class="@((ViewBag.Header == HeaderMenu.History) ? "current" : "")">更新履歴</a></li>
+            <li><a href="~/Admin" class="@((ViewBag.Header == HeaderMenu.Admin) ? "current" : "")">管理者ページ</a></li>
+        </ul>
+    </header>
+    <main>
+        @{
+            if (ViewContext.Controller is HMP_ZD.Controllers.Ledger.TopController)
+            {
+                <div class="left-content slide_menu">
+                    <div class="left-box">
+                        <dl>
+                            <dt>緊急</dt>
+                            <dd>：X件</dd>
+                            <dt>通常</dt>
+                            <dd>：XX件</dd>
+                            <dt>問い合わせ</dt>
+                            <dd>：X件</dd>
+                        </dl>
+                        <h2>表示切替</h2>
+                        <p>全件</p>
+                        <p>未対応　対応中</p>
+                        <h2>検索条件</h2>
+                        <div>担当者<input type="text" /></div>
+                        <div class="mt-10">媒体社<input type="text" /></div>
+                        <div class="mt-10">
+                            誌名<br />
+                            <input type="text" /><a href="/template/雑誌検索.html"><i class="fa fa-lg fa-fw fa-bars"></i>誌名選択</a>
+                        </div>
+                        <div class="mt-10">
+                            発売日<br />
+                            <input class="datepicker mr-5 w-100" type="text" /><br />～<br /><input class="datepicker mr-5 w-100" type="text" />
+                        </div>
+                        <div class="ta-c mt-20"><a href="#" class="btn-ok btn-normal">検索</a></div>
+                        <div class="add-btn">
+                            <a href="#" class="jsTopHeaderSelect"><i class="fa fa-cog"></i>表示項目追加</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+
+        <div class="contents">
+            <h1 class="ttl-h1">@ViewBag.Title</h1>
+            <div id="error">
+                <div>入力内容をもう一度ご確認ください</div>
+                <ul id="error-desc"></ul>
+            </div>
+            @RenderBody()
+        </div>
+        @{  Html.RenderAction("Popup", "InfoPopup");    }
+    <div id="overlay"></div>
+    </main>
+</body>
+</html>

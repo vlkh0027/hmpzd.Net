@@ -1,0 +1,30 @@
+﻿<script src="~/Scripts/infopopup.js"></script>
+<div id="info_popup">
+    @Html.Hidden("ShowInformation")
+    <div class="mdl w-960">
+	    <div class="mdl-btn-close"><a href="#"><i class="fa fa-fw fa-close"></i></a></div>
+	    <div class="mdl-content">
+            <div id="maintenance">
+                @Html.Hidden("ShowMaintenance")
+		        <h2 class="cl-ci-600">システムメンテナンスのお知らせ</h2>
+		        <div class="mb-40">
+			        <p class="p-5 bg-ci-50 pb-20" id="maitenance_body">
+                        @Html.Raw(ViewBag.Maintenance)
+			        </p>
+		        </div>
+            </div>
+		    <h2 class="mb-0">お知らせ</h2>
+		    <ul class="ta-r">
+			    <li><a class="btn-st btn-normal" href="info_index.html">一覧</a></li>
+		    </ul>
+		    <div class="mt-10 box-scroll">
+			    <p class="p-5" id="info_body">
+                    @Html.Raw(ViewBag.Title)
+                    <br />
+                    @Html.Raw(ViewBag.InfoBody)
+			    </p>
+		    </div>
+	    </div>
+	    <div class="ta-c pt-20"><a href="#" class="btn-ok btn-normal mdl-btn-cancel">了解</a></div>
+    </div>
+</div>

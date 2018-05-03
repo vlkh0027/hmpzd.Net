@@ -1,0 +1,84 @@
+﻿
+@{
+    Layout = null;
+}
+
+    <div class="mdl w-960">
+        <div class="mdl-btn-close"><a href="#"><i class="fa fa-fw fa-close jsClose"></i></a></div>
+        <div class="txt-h">ユーザー 選択</div>
+        <div class="mdl-content">
+            <table class="tbl w-full">
+                <colgroup>
+                    <col style="width:200px;">
+                    <col style="width:auto;">
+                </colgroup>
+                <tr><th>名前</th><td><input name="Words" id="query" class="w-full" type="text" placeholder="漢字、ひらがな、カタカナで検索できます·" /></td></tr>
+                <tr>
+                    <th>会社</th>
+                    <td>
+                        @Html.DropDownList("CompanyID", (List<SelectListItem>)ViewBag.CompanyList, "「ー選択―」", new { id = "companies" })
+                    </td>
+                </tr>
+                <tr>
+                    <th>部門グループ</th>
+                    <td>
+                        <select name="DivisionGroupID" id="divisiongroups">
+                            <option value="">グループ</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>部門</th>
+                    <td>
+                        <select name="DivisionID" id="divisions">
+                            <option value="">部門</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>部署</th>
+                    <td>
+                        <select name="DepartmentID" id="departments">
+                            <option value="">「ー選択―」</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <p class="cl-ok-700">部署で検索する場合は、1：会社　2：部門グループ　3：部門　4：部署の順に選択してください。</p>
+            <div class="ta-c pt-20"><a href="#" class="btn-hk btn-normal jsSearch" id="search">検索</a></div>
+            <p class="mt-20 jsSearchResult" id="searchresult">検索結果 5件該当しました。</p>
+            <div class="box-scroll">
+                <table id="candidates" class="tbl w-full jsCandidates">
+                    <colgroup>
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:60px;">
+                    </colgroup>
+                    <tr><th>会社</th><th>部門グループ</th><th>部門</th><th>部署</th><th>名前</th><th></th></tr>
+                </table>
+            </div>
+
+            <div class="ta-r"><a href="#" class="jsAllInsert"><i class="fa fa-lg fa-fw fa-angle-double-down"></i>すべて選択</a></div>
+            <div class="dsp-t">
+                <div class="dsp-tc"><p class="mt-30 jsSelnum" id="selnum">選択ユーザー (0)</p></div>
+                <div class="dsp-tc ta-r"><p class="mt-30"><a href="#" class="jsAllDelete"><i class="fa fa-lg fa-fw fa-angle-double-up"></i>すべて削除</a></p></div>
+            </div>
+            <div class="box-scroll">
+                <table id="inserts" class="tbl w-full jsInserts">
+                    <colgroup>
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:auto;">
+                        <col style="width:60px;">
+                    </colgroup>
+                    <tr><th>会社</th><th>部門グループ</th><th>部門</th><th>部署</th><th>名前</th><th></th></tr>
+                </table>
+            </div>
+        </div>
+        <div class="ta-c pt-20"><a href="#" class="btn-ok btn-normal mr-20 jsOk">追加</a><a href="#" class="btn-hk btn-normal mdl-btn-cancel jsCancel">キャンセル‹</a></div>
+    </div>

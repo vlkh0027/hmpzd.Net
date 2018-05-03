@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML>
+<html lang="ja-JP">
+<head>
+	<meta charset="UTF-8">
+	<title>チーム担当編集 | 管理者ページ | 雑誌局電子台帳</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="css/style.css" />
+	<script charset="utf-8" type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+	<script charset="utf-8" type="text/javascript" src="js/plugins.js"></script>
+	<script charset="utf-8" type="text/javascript" src="js/select2.js"></script>
+	<script charset="utf-8" type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".overlay").click(function() {
+			val = $(this).attr("data-href");
+			$("#overlay-content").load(val);
+			return false;
+		});
+	});
+	</script>
+</head>
+<body id="home">
+<header id="header">
+	<div id="txt-h1"><a href="index.html">雑誌局電子台帳</a></div>
+	<div id="header_user">
+		<span class="header_user-name"><i class="fa fa-user" aria-hidden="true"></i>山田 太郎</span>
+		<a href="logout.html">ログアウト</a>
+	</div>
+	<ul>
+	<li><a href="index.html">電子台帳</a></li>
+	<li><a href="aggregate_index.html">集計</a></li>
+	<li><a href="customer_index.html">得意先検索</a></li>
+	<li><a href="magsearch_index.html">雑誌検索</a></li>
+	<li><a href="schedule_index.html">進行スケジュール</a></li>
+	<li><a href="close_index.html">掲載誌申込締切</a></li>
+	<li><a href="info_index.html">お知らせ</a></li>
+	<li><a href="history_index.html">更新履歴</a></li>
+	<li><a href="admin_index.html" class="current">管理者ページ</a></li>
+	</ul>
+</header>
+<main>
+<div class="contents">
+	<h1 class="ttl-h1">チーム担当編集</h1>
+	<div id="error">
+		<div>入力内容をもう一度ご確認ください</div>
+		<ul>
+			<li>エラー内容が入ります</li>
+		</ul>
+	</div>
+	<div class="cotent-inner02 mt-20">
+		<table class="tbl w-600">
+			<colgroup>
+				<col style="width:150px;">
+				<col style="width:auto;">
+			</colgroup>
+			<tr>
+				<th class="required ta-l">部署</th>
+				<td>
+					<select>
+						<option value="部署選択">部署選択</option>
+						<option value="">テキスト</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="required ta-l">チーム</th>
+				<td>
+					<select>
+						<option value="チーム選択">チーム選択</option>
+						<option value="">テキスト</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th class="required ta-l">担当</th>
+				<td>
+					<button class="overlay" data-href="staff_popup.html">選択</button>
+					<span>
+						○○○○ ○○○○
+					</span>
+				</td>
+			</tr>
+		</table>
+		<div class="mt-20"><a href="team_index.html" class="btn-ok btn-large">登録</a></div>
+		<div class="btn-back">
+			<a href="team_index.html"><i class="fa fa-lg fa-fw fa-chevron-left"></i>戻る</a>
+		</div>
+	</div>
+</div>
+<div id="overlay-content">
+</div>
+</main>
+</body>
+</html>
+

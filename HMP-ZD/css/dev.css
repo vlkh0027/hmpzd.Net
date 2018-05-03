@@ -1,0 +1,24 @@
+.dev tr.del {
+	color: #f00;
+	text-decoration : line-through ;
+}
+.dev td {
+	color: #000;
+}
+.dev tr.unread td {
+	color: red;
+}
+.dev tr.update td {
+	color: orange;
+}
+.dev tr.total td {
+	background-color: #ECEFF1;
+}
+
+#error {
+    display: none;
+}
+
+#overlay, #ad_company, #seluser, #info_popup {
+    display: none;
+}

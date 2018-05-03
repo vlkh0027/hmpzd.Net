@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "トップ";
+    ViewBag.Header = HeaderMenu.Index;
+}
+<script src="~/Scripts/grid.js"></script>
+<script src="~/Scripts/page/Top.js"></script>
+
+<!-- <h1 class="ttl-h1">雑誌局電子台帳一覧</h1> -->
+<ul class="btn-edit-list-top">
+    <li><a class="btn-st btn-normal" href="@Url.Action("Index", "Magazine")">雑誌登録</a></li>
+    <li><a class="btn-st btn-normal" href="@Url.Action("Index", "Web")">web登録</a></li>
+    <li><a class="btn-st btn-normal" href="@Url.Action("New", "Work")">制作登録</a></li>
+</ul>
+<div id="menu-sort">
+    <div id="menu-sort-btn">
+        <span class="line line01"></span>
+        <span class="line line02"></span>
+        <span class="line line03"></span>
+        <p>MENU</p>
+    </div>
+    <div id="menu-sort-list">
+        <dl>            
+            @* FIXME value はもう少し分かりやすいほうがよい *@
+            <dt>表示列</dt>
+            <dd><label><input type="radio" name="S_COLUMN" value="TEAM" />チーム別</label></dd>
+            <dd><label><input type="radio" name="S_COLUMN" value="ADVERTISER" />広告主別</label></dd>
+            <dd><label><input type="radio" name="S_COLUMN" value="PAYEE" />支払い先別</label></dd>
+            <dt>表示行</dt>
+            <dd><label><input type="checkbox" name="S_MAGAZINE" value="1" />雑誌</label></dd>
+            <dd><label><input type="checkbox" name="S_WEB" value="1" />WEB</label></dd>
+            <dd><label><input type="checkbox" name="S_PUBLICATION" value="1" />制作</label></dd>
+        </dl>
+    </div>
+</div>
+<div class="cotent-inner01 mt-20">
+    <div class="jsGrid" style="width:1890px;height:546px;">
+        @*
+            <table class="tbl w-full highlight h-stripe-odd">
+                <colgroup>
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                    <col style="width:130px;">
+                </colgroup>
+                <tr><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th><th>項目名</th></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </table>
+        *@
+    </div>
+    <p class="mt-20">集計合計 000000</p>
+    <div class="mt-10"><a class="btn-hk btn-normal" href="#">集計</a></div>
+</div>
+<div class="jsGridPager"></div>
+<div class="popup">
+    @Html.Partial("Ledger/Info_popup_Main")
+</div>
+<!--
+<div class="pager">
+    <ul>
+        <li class="prev"><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+        <li class="num"><a href="#">1</a></li>
+        <li><span>…</span></li>
+        <li class="num"><a href="#">3</a></li>
+        <li class="num"><a href="#">4</a></li>
+        <li class="num current"><a href="#">5</a></li>
+        <li class="num"><a href="#">6</a></li>
+        <li class="num"><a href="#">7</a></li>
+        <li><span>…</span></li>
+        <li class="num"><a href="#">10</a></li>
+        <li class="next"><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+    </ul>
+</div> -->
